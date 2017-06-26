@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>MoviesAreUs!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="Scripts/scripts.js"></script>
+    <style type='text/css'>
+  @import url("css/myCss.css");
+  </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MoviesAreUs</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="Home.aspx" id="pageHome">Home</a></li>
+        <li><a href="Buy_A_Ticket.aspx" id="pageBuy_A_Ticket">Buy A Ticket</a></li>
+        <li><a href="Pay.aspx" id="pagePay">Pay</a></li>
+        <li><a href="Orders.aspx" id="pageOrders">Orders</a></li>
+          <a class="navbar-brand" runat="server" href="#" id="lblFullName">Not Signed In</a>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span id="dateContainer" class="glyphicon glyphicon-time"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+     <nav class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-header navbar-header1">
+      <a class="navbar-brand navbar-brand1" href="#">All Rights Reserved To Avi Maymon</a>
+    </div>
+  </div>
+</nav>
+</body>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            element = document.getElementById("dateContainer");
+            showDate();
+            setInterval(showDate, 1000);
+        });
+            $(document).ready(function () {
+            var url = window.location.pathname;
+            var substr = url.split('/');
+            var urlaspx = substr[substr.length-1];
+            $('.nav').find('.active').removeClass('active');
+            $('.nav').find('#dateContainer').removeClass('active');
+            $('.nav li a').each(function () {
+                if (this.href.indexOf(urlaspx) >= 0) {
+                $(this).parent().addClass('active');
+                }
+            });
+            $('#dateContainer').removeClass('active');
+            });
+    </script>
+</html>
